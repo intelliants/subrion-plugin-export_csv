@@ -4,9 +4,9 @@
 	<summary>Allows export items in CSV format.</summary>
 	<author>Intelliants LLC</author>
 	<contributor>Intelliants LLC</contributor>
-	<version>3.0.2</version>
-	<date>2013-12-16</date>
-	<compatibility>3.1.0</compatibility>
+	<version>4.0.0</version>
+	<date>2015-12-08</date>
+	<compatibility>4.0</compatibility>
 
 	<adminpages>
 		<page group="extensions" name="export_csv" order="75" url="export_csv/" menus="menu">Export CSV</page>
