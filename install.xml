@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="export_csv">
+	<title>Export CSV</title>
+	<summary>Allows export items in CSV format.</summary>
+	<author>Intelliants LLC</author>
+	<contributor>Intelliants LLC</contributor>
+	<version>3.0.2</version>
+	<date>2013-12-16</date>
+	<compatibility>3.1.0</compatibility>
+
+	<adminpages>
+		<page group="extensions" name="export_csv" order="75" url="export_csv/" menus="menu">Export CSV</page>
+	</adminpages>
+
+	<phrases>
+		<phrase category="admin" key="available_items">Available items</phrase>
+		<phrase category="admin" key="generate">Generate</phrase>
+		<phrase category="admin" key="package_error">Please choose package first</phrase>
+		<phrase category="admin" key="fields_error">Please choose fields for export</phrase>
+		<phrase category="admin" key="delimiter">Delimiter</phrase>
+		<phrase category="admin" key="enclosure">Enclosure</phrase>
+		<phrase category="admin" key="delimeter_error">Delimiter field empty.</phrase>
+		<phrase category="admin" key="getfields">Get fields</phrase>
+		<phrase category="admin" key="export_csv">Export CSV</phrase>
+		<phrase category="admin" key="start_from">Start from</phrase>
+		<phrase category="admin" key="limit">Limit</phrase>
+		<phrase category="admin" key="csv_file_generated"><![CDATA[CSV file has been generated. <a href=":filename">Click here</a> to download it.]]></phrase>
+	</phrases>
+</plugin>
