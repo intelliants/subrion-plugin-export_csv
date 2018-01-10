@@ -26,104 +26,89 @@
 
 ini_get('safe_mode') || set_time_limit(180);
 
+$iaView->assign('tooltips', iaLanguage::getTooltips());
+
 $iaItem = $iaCore->factory('item');
 
-if (iaView::REQUEST_JSON == $iaView->getRequestType())
-{
-	if ('getFields' == $_GET['action'])
-	{
-		$itemTable = $iaItem->getItemTable($_GET['item']);
+if (iaView::REQUEST_JSON == $iaView->getRequestType()) {
+    if ('getFields' == $_GET['action']) {
+        $itemTable = $iaItem->getItemTable($_GET['item']);
 
-		$output['table'] = $itemTable;
-		$columns = $iaCore->iaDb->describe($itemTable);
+        $output['table'] = $itemTable;
+        $columns = $iaCore->iaDb->describe($itemTable);
 
-		foreach($columns as $column)
-		{
-			$output['fields'][] = $column['Field'];
-		}
+        foreach ($columns as $column) {
+            $output['fields'][] = $column['Field'];
+        }
 
-		$iaView->assign($output);
-	}
+        $iaView->assign($output);
+    }
 }
 
-if (iaView::REQUEST_HTML == $iaView->getRequestType())
-{
-	$error = false;
-	$messages = array();
+if (iaView::REQUEST_HTML == $iaView->getRequestType()) {
+    $error = false;
+    $messages = array();
 
-	// get list of installed packages
-	$items_list = $iaItem->getItems();
-	$iaView->assign('items_list', $items_list);
+    // get list of installed packages
+    $items_list = $iaItem->getItems();
 
-	if (isset($_POST['getFields']))
-	{
-		if (empty($_POST['items']))
-		{
-			$iaView->setMessages(iaLanguage::get('package_error'));
-		}
-	}
+    $iaView->assign('items_list', $items_list);
 
-	if (isset($_POST['download']))
-	{
-		if (empty($_POST['fields']))
-		{
-			$error = true;
-			$messages[] = iaLanguage::get('fields_error');
-		}
+    if (isset($_POST['getFields'])) {
+        if (empty($_POST['items'])) {
+            $iaView->setMessages(iaLanguage::get('package_error'));
+        }
+    }
 
-		if (empty($_POST['delimeter']))
-		{
-			$error = true;
-			$messages[] = iaLanguage::get('delimeter_error');
-		}
+    if (isset($_POST['download'])) {
+        if (empty($_POST['fields'])) {
+            $error = true;
+            $messages[] = iaLanguage::get('fields_error');
+        }
 
-		if (!$error)
-		{
-			$delimeter = $_POST['delimeter'];
-			$enclosure = $_POST['enclosure'] ? $_POST['enclosure'] : '"';
-			$attachment = false;
+        if (empty($_POST['delimeter'])) {
+            $error = true;
+            $messages[] = iaLanguage::get('delimeter_error');
+        }
 
-			$start = isset($_POST['start']) ? $_POST['start'] : '0';
-			$limit = isset($_POST['limit']) ? $_POST['limit'] : '1000';
-			$filename = urlencode('data_' . $_POST['items'] . '.' . 'csv');
+        if (!$error) {
+            $delimeter = $_POST['delimeter'];
+            $enclosure = $_POST['enclosure'] ? $_POST['enclosure'] : '"';
+            $attachment = false;
 
-			if ($data = $iaDb->all($_POST['fields'], '', $start, $limit, $_POST['tableName']))
-			{
-				if ($attachment)
-				{
-					// send response headers to the browser
-					header('Content-Type: text/csv');
-					header('Content-Disposition: attachment; filename=' . $filename);
-					$csv_file = fopen('php://output', 'w');
-				}
-				else
-				{
-					$csv_file = fopen(IA_TMP . $filename, 'w');
-				}
+            $start = isset($_POST['start']) ? $_POST['start'] : '0';
+            $limit = isset($_POST['limit']) ? $_POST['limit'] : '1000';
+            $filename = urlencode('data_' . $_POST['items'] . '.' . 'csv');
 
-				// process records
-				foreach ($data as $fields)
-				{
-					$fields = array_map(array('iaSanitize', 'sql'), $fields);
-					fputcsv($csv_file, $fields, $delimeter, $enclosure);
-				}
-				fclose($csv_file);
+            if ($data = $iaDb->all($_POST['fields'], '', $start, $limit, $_POST['tableName'])) {
+                if ($attachment) {
+                    // send response headers to the browser
+                    header('Content-Type: text/csv');
+                    header('Content-Disposition: attachment; filename=' . $filename);
+                    $csv_file = fopen('php://output', 'w');
+                } else {
+                    $csv_file = fopen(IA_TMP . $filename, 'w');
+                }
 
-				if ($attachment)
-				{
-					$iaView->set('nodebug', 1);
-					$iaView->disableLayout();
-					die();
-				}
-				else
-				{
-					$messages[] = iaLanguage::getf('csv_file_generated', array('filename' => IA_CLEAR_URL . 'tmp/' . $filename));
-				}
-			}
-		}
+                // process records
+                foreach ($data as $fields) {
+                    $fields = array_map(array('iaSanitize', 'sql'), $fields);
+                    fputcsv($csv_file, $fields, $delimeter, $enclosure);
+                }
+                fclose($csv_file);
 
-		$iaView->setMessages($messages, ($error ? iaView::ERROR : iaView::SUCCESS));
-	}
+                if ($attachment) {
+                    $iaView->set('nodebug', 1);
+                    $iaView->disableLayout();
+                    die();
+                } else {
+                    $messages[] = iaLanguage::getf('csv_file_generated', array('filename' => IA_CLEAR_URL . 'tmp/' . $filename));
+                }
+            }
+        }
 
-	$iaView->display();
+        $iaView->setMessages($messages, ($error ? iaView::ERROR : iaView::SUCCESS));
+    }
+
+    $iaView->display();
 }
