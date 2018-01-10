@@ -30,4 +30,12 @@
 		<phrase category="admin" key="limit">Limit</phrase>
 		<phrase category="admin" key="csv_file_generated"><![CDATA[CSV file has been generated. <a href=":filename">Click here</a> to download it.]]></phrase>
 	</phrases>
+
+	<upgrade>
+		<sql version="4.1.0">
+			<![CDATA[
+			UPDATE `{prefix}items` SET `table_name` = 'payment_transactions' WHERE `item` = 'transactions';
+           ]]>
+		</sql>
+	</upgrade>
 </plugin>
