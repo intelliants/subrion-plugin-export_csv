@@ -39,7 +39,7 @@
 			</div>
 
 			<div class="row">
-				<label class="col col-lg-2 control-label" for="input-enclosure">{lang key='enclosure'}</label>
+				<label class="col col-lg-2 control-label" for="input-enclosure">{lang key='enclosure'} <a href="#" class="js-tooltip" title="{$tooltips.csv_enclosures}"><i class="i-info"></i></a></label>
 				<div class="col col-lg-1">
 					<input type="text" name="enclosure" id="input-enclosure" maxlength="1" value="{if isset($smarty.post.enclosure)}{$smarty.post.enclosure|htmlentities}{else}&#34;{/if}">
 				</div>
@@ -76,4 +76,4 @@
 	</div>
 </form>
 
-{ia_print_js files='_IA_URL_plugins/export_csv/js/admin/index'}
+{ia_print_js files='_IA_URL_modules/export_csv/js/admin/index'}

@@ -4,13 +4,17 @@
 	<summary>Allows export items in CSV format.</summary>
 	<author>Intelliants LLC</author>
 	<contributor>Intelliants LLC</contributor>
-	<version>4.0.0</version>
-	<date>2015-12-08</date>
-	<compatibility>4.0</compatibility>
+	<version>4.1.0</version>
+	<date>2018-01-10</date>
+	<compatibility>4.1</compatibility>
 
 	<adminpages>
 		<page group="extensions" name="export_csv" order="75" url="export_csv/" menus="menu">Export CSV</page>
 	</adminpages>
+
+	<tooltips>
+		<tooltip key="csv_enclosures">Enclose a field that contains a delimiter, an enclosure character, or a newline with symbol</tooltip>
+	</tooltips>
 
 	<phrases>
 		<phrase category="admin" key="available_items">Available items</phrase>
@@ -26,4 +30,12 @@
 		<phrase category="admin" key="limit">Limit</phrase>
 		<phrase category="admin" key="csv_file_generated"><![CDATA[CSV file has been generated. <a href=":filename">Click here</a> to download it.]]></phrase>
 	</phrases>
+
+	<upgrade>
+		<sql version="4.1.0">
+			<![CDATA[
+			UPDATE `{prefix}items` SET `table_name` = 'payment_transactions' WHERE `item` = 'transactions';
+           ]]>
+		</sql>
+	</upgrade>
 </plugin>
