@@ -49,8 +49,8 @@ if (iaView::REQUEST_HTML == $iaView->getRequestType()) {
     $error = false;
     $messages = array();
 
-    // get list of installed packages
-    $items_list = $iaItem->getItems();
+    // get list & info of installed packages
+    $items_list = $iaItem->getItemsInfo();
 
     $iaView->assign('items_list', $items_list);
 

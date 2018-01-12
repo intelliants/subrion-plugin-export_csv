@@ -23,7 +23,7 @@
 					<select name="items" id="input-items">
 						<option value="">{lang key='_select_'}</option>
 							{foreach $items_list as $one_item}
-								<option value="{$one_item}" {if isset($smarty.post.items) && $smarty.post.items == $one_item}selected="selected"{/if}>{lang key=$one_item}</option>
+								<option value="{$one_item.item}" {if isset($smarty.post.items) && $smarty.post.items == $one_item.item}selected="selected"{/if}>{lang key=$one_item.module default='Core'}: {lang key=$one_item.item}</option>
 							{/foreach}
 					</select>
 				</div>
