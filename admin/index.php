@@ -71,8 +71,6 @@ if (iaView::REQUEST_HTML == $iaView->getRequestType()) {
             $messages[] = iaLanguage::get('delimeter_error');
         }
 
-
-
         if (!$error) {
             $delimeter = $_POST['delimeter'];
             $enclosure = $_POST['enclosure'] ? $_POST['enclosure'] : '"';
