@@ -2,7 +2,7 @@
 /******************************************************************************
  *
  * Subrion - open source content management system
- * Copyright (C) 2015 Intelliants, LLC <http://www.intelliants.com>
+ * Copyright (C) 2018 Intelliants, LLC <https://intelliants.com>
  *
  * This file is part of Subrion.
  *
@@ -20,7 +20,7 @@
  * along with Subrion. If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * @link http://www.subrion.org/
+ * @link https://subrion.org/
  *
  ******************************************************************************/
 
@@ -71,6 +71,8 @@ if (iaView::REQUEST_HTML == $iaView->getRequestType()) {
             $messages[] = iaLanguage::get('delimeter_error');
         }
 
+
+
         if (!$error) {
             $delimeter = $_POST['delimeter'];
             $enclosure = $_POST['enclosure'] ? $_POST['enclosure'] : '"';
@@ -104,6 +106,8 @@ if (iaView::REQUEST_HTML == $iaView->getRequestType()) {
                 } else {
                     $messages[] = iaLanguage::getf('csv_file_generated', array('filename' => IA_CLEAR_URL . 'tmp/' . $filename));
                 }
+            } else {
+                $messages[] = iaLanguage::getf('csv_nothing_to_export', array('item' => ucfirst($_POST['items'])));
             }
         }
 
