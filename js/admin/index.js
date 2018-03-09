@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     $('#toggle-pages').data('checked', true).click(function (e) {
         e.preventDefault();
 
