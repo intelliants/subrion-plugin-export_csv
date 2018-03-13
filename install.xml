@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<plugin name="export_csv">
+<module type="plugin" name="export_csv">
 	<title>Export CSV</title>
 	<summary>Allows export items in CSV format.</summary>
 	<author>Intelliants LLC</author>
 	<contributor>Intelliants LLC</contributor>
-	<version>4.1.0</version>
-	<date>2018-01-10</date>
-	<compatibility>4.1</compatibility>
+	<version>4.2.0</version>
+	<date>2018-03-06</date>
+	<compatibility>4.2</compatibility>
 
 	<adminpages>
 		<page group="extensions" name="export_csv" order="75" url="export_csv/" menus="menu">Export CSV</page>
@@ -29,6 +29,7 @@
 		<phrase category="admin" key="start_from">Start from</phrase>
 		<phrase category="admin" key="limit">Limit</phrase>
 		<phrase category="admin" key="csv_file_generated"><![CDATA[CSV file has been generated. <a href=":filename">Click here</a> to download it.]]></phrase>
+		<phrase category="admin" key="csv_nothing_to_export"><![CDATA[Nothing to export from :item.]]></phrase>
 	</phrases>
 
 	<upgrade>
@@ -38,4 +39,4 @@
            ]]>
 		</sql>
 	</upgrade>
-</plugin>
+</module>
